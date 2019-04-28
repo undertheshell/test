@@ -1,0 +1,123 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>canvas</title>
+<link rel="stylesheet" href="labastyle.css">
+</head>
+<body>
+<h3>Лабораторная работа по canvas</h3>
+<p>1) график функции у=sin(x^(1/5))</p>
+<canvas id="canvas1" width="1500" height="100"></canvas>
+<script>
+var canvas1 = document.getElementById("canvas1");
+var a = canvas1.getContext("2d");
+var y0 = canvas1.height / 2;
+a.beginPath();
+a.moveTo(0, y0);
+for (var x = 0; x < canvas1.width; x++) {
+  var y = f(x);
+  a.lineTo(x, y + y0);
+}
+a.stroke();
+function f(x) {
+  return Math.sin(x^(1/5));
+}
+</script>
+<p>2)увеличивающиеся треугольники</p>
+<canvas id="canvas2" width="1000" height="600"></canvas>
+<script> 
+var canvas2 = document.getElementById("canvas2");
+var b = canvas2.getContext("2d");
+b.fillStyle="pink";
+b.beginPath();
+b.moveTo(100,500);
+b.lineTo(300,500);
+b.lineTo(300,400);
+b.closePath();
+b.fill();
+b.strokeStyle="gray";
+b.lineWidth=5;
+b.stroke();
+var b2 = canvas2.getContext("2d");
+b2.fillStyle="pink";
+b2.beginPath();
+b2.moveTo(300,500);
+b2.lineTo(500,500);
+b2.lineTo(500,300);
+b2.closePath();
+b2.fill();
+b2.strokeStyle="gray";
+b2.lineWidth=5;
+b2.stroke();
+var b3 = canvas2.getContext("2d");
+b3.fillStyle="pink";
+b3.beginPath();
+b3.moveTo(500,500);
+b3.lineTo(700,500);
+b3.lineTo(700,200);
+b3.closePath();
+b3.fill();
+b3.strokeStyle="gray";
+b3.lineWidth=5;
+b3.stroke();
+var b4 = canvas2.getContext("2d");
+b4.fillStyle="pink";
+b4.beginPath();
+b4.moveTo(700,500);
+b4.lineTo(900,500);
+b4.lineTo(900,100);
+b4.closePath();
+b4.fill();
+b4.strokeStyle="gray";
+b4.lineWidth=5;
+b4.stroke();
+</script>
+<p>3)закрашенная фигура из 3 линий безье</p>
+<canvas id="canvas3" width="1000" height="200"></canvas>
+<script> 
+var context3 = document.getElementById("canvas3");
+var c=canvas3.getContext("2d");
+c.fillStyle="gray";
+c.beginPath();
+c.moveTo(200,150);
+c.bezierCurveTo(300, 10, 388, 10, 388, 170);
+c.bezierCurveTo(388, 170, 388, 10, 300, 170);
+c.bezierCurveTo(300, 170, 388, 10, 300, 10);
+c.lineWidth=5;
+c.closePath();
+c.fill();
+c.strokeStyle="pink";
+c.stroke();
+</script>
+<p>4)изображение из графического файла с трансформацией размеров</p>
+<canvas id="canvas4" width="1000" height="700"></canvas>
+<button type="button" id="color" onclick="scaleimg()">Изменить размер изображения</button>
+<script> 
+var img = document.createElement("img"); 
+img.src ="orig.jpg";
+var context4 = document.getElementById("canvas4");
+var d=canvas4.getContext("2d");
+img.addEventListener("load", function() {
+for (var x = 10; x < 200; x += 30)
+d.drawImage(img, x, 10);
+});
+function scaleimg(){
+d.lenght=1000;
+for (i=0; i<d.lenght; i++) {
+d.translate(50, 50);
+d.drawImage(img, 10, 20, 600, 600);}
+}
+
+function scaleimg1(){
+d.translate(50, 50);
+d.scale(200, 400);
+if(save){
+d.restore();}
+d.drawImage(img, x, 10);
+}
+</script>
+<a href="laboratornye.html">Главная</a>
+<p> <input type="button" id="color" value="Назад" onclick="history.back()">
+</body>
+</html>
